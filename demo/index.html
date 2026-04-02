@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretty Modal Demo</title>
+    <link rel="stylesheet">
+
+    
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" type="module"></script>
+</head>
+<body>
+
+
+    <button onclick="prettyModal.open('dialog-1')">Abrir modal abre modal</button>
+    
+    <dialog id="dialog-1" >
+        <button onclick="prettyModal.close('dialog-1')">Cerrar</button>
+        <h1>Hola mundo abre modal</h1>
+    </dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/Flip.min.js"></script>
+    
+</body>
+</html>
