@@ -9,11 +9,10 @@ export class PrettyModal {
         if(!dialog) return
 
         const origin = event.currentTarget
-        
-        const randomId = Math.random().toString(36).substring(2, 9);
-        origin.dataset.flipId = randomId;
-        dialog.dataset.flipId = randomId;
-        origin.dataset.pmOriginId = randomId
+        const randomId = Math.random().toString(16).slice(2)
+
+        dialog.dataset.flipId = randomId
+        origin.dataset.flipId = randomId
 
         const originState = Flip.getState(origin)
 
@@ -21,10 +20,10 @@ export class PrettyModal {
 
         Flip.from(originState, {
             targets: dialog,
-            duration: 0.7,
-            ease: "elastic.out(1,0.75)",
             scale: true,
-            toggleClass: "pretty-modal-opening"
+            ease: CustomEase.create("custom", "M0,0 C0.305,0.206 0.116,0.567 0.3,0.8 0.394,0.921 0.491,1 1,1"),
+            toggleClass: 'pretty-modal-opening',
+            duration: 0.7,
         })
 
     }
@@ -35,20 +34,23 @@ export class PrettyModal {
         if(!dialog) return
 
         const originId = dialog.dataset.flipId;
-        const origin = document.querySelector(`[data-pm-origin-id="${originId}"]`);
+        const origin = document.querySelector(`[data-flip-id="${originId}"]:not([open])`)
 
-        const originState = Flip.getState(origin);
-
+        const originState = Flip.getState(origin) 
+        
         Flip.to(originState, {
             targets: dialog,
-            ease: "power4.out",
             scale: true,
-            toggleClass: "pretty-modal-closing",
+            ease: CustomEase.create("custom", "M0,0 C0.305,0.206 0.116,0.567 0.3,0.8 0.394,0.921 0.491,1 1,1"),
             onComplete: () => {
                 dialog.setAttribute("style", "")
                 dialog.close()
-            }
+            },
+            toggleClass: 'pretty-modal-closing',
+            duration: 0.7,  
         })
+
+        
 
     }
 
